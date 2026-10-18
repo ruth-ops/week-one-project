@@ -1,60 +1,76 @@
-display_score =0
-print ( "welcome to the Netflix trivia quiz !" )
-print ("question 1 : 'in squid game' what is the title of the first game playeers play ?")
+import random
 
-print ("A. red light green light")
-print ("B. tug of war")
-print ("C. marbles")
-print ("D. glass bridge")
+# list of 5 Squid Game questions
+questions = [
+    {
+        "question": "What is the title of the first deadly game players play?",
+        "choices": ["A. Tug of War", "B. Red Light, Green Light", "C. Ddakji", "D. Marbles"],
+        "answer": "B"
+    },
+    {
+        "question": "What game is played in the honeycomb challenge?",
+        "choices": ["A. Tug of War", "B. Dalgona Candy", "C. Hopscotch", "D. Rock Paper Scissors"],
+        "answer": "B"
+    },
+    {
+        "question": "What is player 456's real name?",
+        "choices": ["A. Cho Sang-woo", "B. Kang Sae-byeok", "C. Oh Il-nam", "D. Seong Gi-hun"],
+        "answer": "D"
+    },
+    {
+        "question": "What geometric shape is on the masks of the lowest-ranking soldiers?",
+        "choices": ["A. Circle", "B. Triangle", "C. Square", "D. Star"],
+        "answer": "A"
+    },
+    {
+        "question": "What is the total final prize money in the giant piggy bank?",
+        "choices": ["A. 10 billion won", "B. 30.5 billion won", "C. 45.6 billion won", "D. 100 billion won"],
+        "answer": "C"
+    }
+]
 
-input1 = input ("enter your answer : ")
-if input1 == "A" or input1 == "a":
-    print ("correct answer !")
-    display_score = 0
-print ("question 2 : 'in squid game' what game is played in the honeycomb challenge ?¨)  ")
+# Randomizing question order
+random.shuffle(questions)
 
-print( "A. tug of war")
-print ("B. dalgona candy")
-print ("C. hopscotch")
-print ("D. rock paper scissors")
+score = 0
+total_questions = len(questions)
 
-input2 = input ("enter your answer : ")
-if input2 == "B" or input2 == "b":
-    print ("correct answer !")
-    display_score += 1
+# The for loop to cycle through each question
+for q in questions:
+    print("\n" + q["question"])
+    
+    # Print out each choice in the list
+    for choice in q["choices"]:
+        print(choice)
+        
+    #  Input validation using while and try/except
+    while True:
+        try:
+            user_answer = input("Enter your choice (A, B, C, or D): ").strip().upper()
+            
+            # If they type something that isn't A, B, C, or D, raise an error
+            if user_answer not in ["A", "B", "C", "D"]:
+                raise ValueError("Invalid option! Please enter A, B, C, or D.")
+            break # Exit the while loop if input is valid
+            
+        except ValueError as err:
+            print(f"⚠️ {err}")
+
+    # Step 5: Check if the answer is correct
+    if user_answer == q["answer"]:
+        print("✅ Correct!")
+        score += 1
+    else:
+        print(f"❌ Incorrect! The correct answer was {q['answer']}.")
+
+# Step 6: Final score keeping and feedback based on score[cite: 1]
+print(f"\n==============================")
+print(f"Game Over! Your final score is: {score}/{total_questions}")
+
+if score == total_questions:
+    print("Feedback: Excellent!")
+elif score >= 3:
+    print("Feedback: Good!")
 else:
-    print ("incorrect answer !")
-
-    print ("question 3 : 'in squid game' what happens if you lose a game ?")
-    print ("A. you  are eliminated from the game")
-    print ("B. you are locked in a room")
-    print ("C. you are sent home with zero money")
-    print ("D. you must give up your money and leave the game")
-
-    input3 = input ("enter your answer : ")
-if input3 == "A" or input3 == "a":
-    print ("correct answer !")
-    display_score += 1
-
-    print ("question 4 : 'in squid game' what shape is the dalgona candy in the honeycomb challenge ?")
-    print ("A. circle")
-    print ("B. triangle")
-    print ("C. star")
-    print ("D. umbrella")
-
-    input4 = input ("enter your answer : ")
-if input4 == "C" or input4 == "c":
-    print ("correct answer !")
-    display_score += 1
-
-    print ("question 5 : 'in squid game' how much money does the winner of the game receive ?")
-    print ("A. 100 million won")
-    print ("B. 200 million won")
-    print ("C. 300 million won")
-    print ("D. 400 million won")
-    input5 = input ("enter your answer : ")
-    if input5 == "B" or input5 == "b":
-        print ("correct answer !")
-        display_score += 1
-
-print (f"your final score is : {display_score}/5")
+    print("Feedback: Try Again!")
+print(f"==============================")

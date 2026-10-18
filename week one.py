@@ -39,7 +39,7 @@ total_questions = len(questions)
 for q in questions:
     print("\n" + q["question"])
     
-    # Print out each choice in the list
+    # Print each choice in the list
     for choice in q["choices"]:
         print(choice)
         
