@@ -1,76 +1,43 @@
-import random
-
-# list of 5 Squid Game questions
-questions = [
-    {
-        "question": "What is the title of the first deadly game players play?",
-        "choices": ["A. Tug of War", "B. Red Light, Green Light", "C. Ddakji", "D. Marbles"],
-        "answer": "B"
-    },
-    {
-        "question": "What game is played in the honeycomb challenge?",
-        "choices": ["A. Tug of War", "B. Dalgona Candy", "C. Hopscotch", "D. Rock Paper Scissors"],
-        "answer": "B"
-    },
-    {
-        "question": "What is player 456's real name?",
-        "choices": ["A. Cho Sang-woo", "B. Kang Sae-byeok", "C. Oh Il-nam", "D. Seong Gi-hun"],
-        "answer": "D"
-    },
-    {
-        "question": "What geometric shape is on the masks of the lowest-ranking soldiers?",
-        "choices": ["A. Circle", "B. Triangle", "C. Square", "D. Star"],
-        "answer": "A"
-    },
-    {
-        "question": "What is the total final prize money in the giant piggy bank?",
-        "choices": ["A. 10 billion won", "B. 30.5 billion won", "C. 45.6 billion won", "D. 100 billion won"],
-        "answer": "C"
-    }
+#list of questions
+questions =[
+    "what is the first deaddly game in squid game?",
+    "what is the name of the main character in squid game?",
+    "what shape is on the lowest-ranked mask in squid game?",
+    "what is the name of the game where the players have to cross a bridge made of glass?",
 ]
+# list of choices for each question
+choices =[
+    ["a) Red Light, Green Light", "b) Dalgona Candy", "c) Marbles", "d) Glass Bridge"],
+    ["a) Seong Gi-hun", "b) Cho Sang-woo", "c) Kang Sae-byeok", "d) Abdul Ali"],
+    ["a) Circle", "b) Triangle", "c) Square", "d) Star"],
+    ["a) Red Light, Green Light",  "b) Dalgona Candy", "c) Marbles", "d) Glass bridge"]
+]
+# list of correct answers for each question
+answers = ["a", "a", "a", "d"]
 
-# Randomizing question order
-random.shuffle(questions)
+#variable to run the quiz
+def run_quiz():
+    score = 0
+    # outer loop question for i in range
+    for i in range(len(questions)):
+        print(questions[i])
+     # inner loop for j in range   
+        for j in range(len(choices[i])):
+            print(choices[i][j])
+            
+        answer = input("enter your answer (a,b,c,d):")
+        if answer == answers[i]:
+            score += 1
 
-score = 0
-total_questions = len(questions)
-
-# The for loop to cycle through each question
-for q in questions:
-    print("\n" + q["question"])
+    # showing total score
+    total_questions = len(questions)
+    print(f"your final score is:{score}/{total_questions}:")
     
-    # Print out each choice in the list
-    for choice in q["choices"]:
-        print(choice)
-        
-    #  Input validation using while and try/except
-    while True:
-        try:
-            user_answer = input("Enter your choice (A, B, C, or D): ").strip().upper()
-            
-            # If they type something that isn't A, B, C, or D, raise an error
-            if user_answer not in ["A", "B", "C", "D"]:
-                raise ValueError("Invalid option! Please enter A, B, C, or D.")
-            break # Exit the while loop if input is valid
-            
-        except ValueError as err:
-            print(f"⚠️ {err}")
-
-    # Step 5: Check if the answer is correct
-    if user_answer == q["answer"]:
-        print("✅ Correct!")
-        score += 1
+    if score == total_questions:
+        print("execellent")
+    elif score >= total_questions:
+        print("good")
     else:
-        print(f"❌ Incorrect! The correct answer was {q['answer']}.")
+        print("try again")
 
-# Step 6: Final score keeping and feedback based on score[cite: 1]
-print(f"\n==============================")
-print(f"Game Over! Your final score is: {score}/{total_questions}")
-
-if score == total_questions:
-    print("Feedback: Excellent!")
-elif score >= 3:
-    print("Feedback: Good!")
-else:
-    print("Feedback: Try Again!")
-print(f"==============================")
+run_quiz()
