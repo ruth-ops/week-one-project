@@ -19,10 +19,10 @@ answers = ["a", "a", "a", "d"]
 def run_quiz():
     score = 0
     # outer loop question for i in range
-    for i in range(len(questions)):
+    for i in range(4):
         print(questions[i])
      # inner loop for j in range   
-        for j in range(len(choices[i])):
+        for j in range(4):
             print(choices[i][j])
             
         answer = input("enter your answer (a,b,c,d):")
@@ -30,12 +30,12 @@ def run_quiz():
             score += 1
 
     # showing total score
-    total_questions = len(questions)
+    total_questions = 4
     print(f"your final score is:{score}/{total_questions}:")
     
     if score == total_questions:
         print("execellent")
-    elif score >= total_questions:
+    elif score >= 2:
         print("good")
     else:
         print("try again")
